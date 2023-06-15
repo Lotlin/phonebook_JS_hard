@@ -165,7 +165,7 @@ const formButtons = [
 
   const createRow = ({name: firstName, surname, phone}) => {
     const tr = document.createElement('tr');
-
+    tr.classList.add('contact');
     const tdDEl = document.createElement('td');
     tdDEl.classList.add('delete');
     const buttonDel = document.createElement('button');
@@ -174,9 +174,11 @@ const formButtons = [
 
     const tdName = document.createElement('td');
     tdName.textContent = firstName;
+    tdName.classList.add('name');
 
     const tdSurname = document.createElement('td');
     tdSurname.textContent = surname;
+    tdSurname.classList.add('surname');
 
     const tdPhone = document.createElement('td');
     const phoneLink = document.createElement('a');
@@ -286,6 +288,30 @@ const formButtons = [
 
     formOverlay.addEventListener('click', () => {
       formOverlay.classList.remove('is-visible');
+    });
+
+    const delElem = (elems) => {
+      elems.forEach(elem => {
+        elem.classList.add('delete');
+      });
+    };
+
+    list.addEventListener('click', e => {
+      const target = e.target;
+      const contacts = list.querySelectorAll('.contact');
+      let sorted = '';
+
+      if (target.closest('.name')) {
+        delElem(contacts);
+        sorted = data.sort((a, b) => a.name > b.name ? 1 : -1);
+      }
+
+      if (target.closest('.surname')) {
+        delElem(contacts);
+        sorted = data.sort((a, b) => a.surname > b.surname ? 1 : -1);
+      }
+
+      renderContacts(list, sorted);
     });
   };
 
