@@ -117,6 +117,7 @@ const formButtons = [
         <th>Имя</th>
         <th>Фамилия</th>
         <th>Телефон</th>
+        <th>Редактировать</th>
       </tr>
     `);
 
@@ -142,11 +143,11 @@ const formButtons = [
         <input class="form-input" name="name" id="name" type="text">
       </div>
       <div class="form-group">
-        <label class="form-label" for="surname">Имя</label>
+        <label class="form-label" for="surname">Фамилия</label>
         <input class="form-input" name="surname" id="surname" type="text">
       </div>
       <div class="form-group">
-        <label class="form-label" for="phone">Имя</label>
+        <label class="form-label" for="phone">Телефон</label>
         <input class="form-input" name="phone" id="phone" type="number">
       </div>
     `);
@@ -184,7 +185,14 @@ const formButtons = [
     tr.phoneLink = phoneLink;
     tdPhone.append(phoneLink);
 
-    tr.append(tdDEl, tdName, tdSurname, tdPhone);
+    const tdEdit = document.createElement('td');
+    const buttonEdit = document.createElement('button');
+    buttonEdit.classList.add('btn');
+    buttonEdit.classList.add('btn-primary');
+    buttonEdit.textContent = 'Редактировать';
+    tdEdit.append(buttonEdit);
+
+    tr.append(tdDEl, tdName, tdSurname, tdPhone, tdEdit);
 
     return tr;
   };
